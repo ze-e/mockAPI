@@ -11,8 +11,6 @@ exports.getAllLoans = async (req, res) => {
 
 exports.getLoanById = async (req, res) => {
   try {
-    if (!req.params.id)
-      return res.status(400).json({ message: "request must contain loanId" });
     const loan = await loanService.getLoanById(req.params.id);
     res.status(200).json({ data: loan, message: "got loan" });
   } catch (err) {
@@ -60,15 +58,6 @@ exports.deleteLoan = async (req, res) => {
       req.params.id,
     );
     res.status(200).json({ message: "deleted loan" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-exports.deleteAll = async (req, res) => {
-  try {
-    await loanService.deleteAll(req.params.id);
-    res.status(200).json({ message: "deleted all" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

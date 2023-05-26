@@ -82,16 +82,6 @@ async function deleteLoan(loanId) {
   }
 }
 
-// DELETE method to delete a loan object by loanId
-async function deleteAll() {
-  // try {
-  //   await Loan.deleteMany({ _id: { $ne: null } });
-  // } catch (error) {
-  //   throw new Error(`Error while deleting`);
-  // }
-  throw new Error(`Deleting disabled`);
-}
-
 module.exports = {
   getAllLoans,
   getLoanById,
@@ -99,5 +89,4 @@ module.exports = {
   updateBorrower,
   deleteBorrower,
   deleteLoan,
-  deleteAll
 };
