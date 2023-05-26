@@ -124,6 +124,7 @@ chai.use(chaiHttp);
           .delete("/loan/" + loan.loanId + "/borrower/" + pairId)
           .end((err, res) => {
             res.should.have.status(200);
+            res.body.should.be.a("object");
             done();
           });
       });
