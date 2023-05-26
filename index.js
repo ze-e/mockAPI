@@ -1,7 +1,7 @@
 const loanRoutes = require('./routes/loan.routes');
 const express = require('express');
 const mongoose = require("mongoose");
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 
 //configure mongoose
 mongoose.connect(
