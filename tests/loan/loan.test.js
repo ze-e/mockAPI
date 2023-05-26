@@ -112,7 +112,7 @@ chai.use(chaiHttp);
     });
   });
 
-  describe("/DELETE/loan/:id/borrower/:borrowerId loan", () => {
+  describe("/DELETE/loan/:id/borrower/:pairId loan", () => {
     it("should DELETE a borrower", (done) => {
       let loan = new Loan({
         borrowers: [{ firstName: "new", lastName: "new", phone: "1-555-5555" }],
