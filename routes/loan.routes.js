@@ -15,6 +15,6 @@ router.route("/").get(getAllLoans);
 router.route("/loan").post(createLoan);
 router.route("/loan/:id").get(getLoanById).delete(deleteLoan);
 router.route("/loan/:id/borrower").patch(updateBorrower);
-router.route("/loan/:id/borrower").patch(deleteBorrower);
+router.route("/loan/:id/borrower/:pairId").delete(deleteBorrower);
 
 module.exports = router;

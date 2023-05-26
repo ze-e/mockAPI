@@ -112,7 +112,7 @@ chai.use(chaiHttp);
     });
   });
 
-  describe("/DELETE/loan/:id/borrower loan", () => {
+  describe("/DELETE/loan/:id/borrower/:borrowerId loan", () => {
     it("should DELETE a borrower", (done) => {
       let loan = new Loan({
         borrowers: [{ firstName: "new", lastName: "new", phone: "1-555-5555" }],
@@ -121,24 +121,26 @@ chai.use(chaiHttp);
         const pairId = loan.borrowers[0].pairId.toString();
         chai
           .request(app)
-          .patch("/loan/" + loan.loanId + "/borrower")
-          .send({
-            pairId: pairId,
-          })
+          .delete("/loan/" + loan.loanId + "/borrower/" + pairId)
           .end((err, res) => {
             res.should.have.status(200);
-            res.body.data.should.be.a("object");
             done();
           });
       });
     });
-      it("should not find a loan given the id", (done) => {
+    it("should NOT DELETE a borrower", (done) => {
+      let loan = new Loan({
+        borrowers: [{ firstName: "new", lastName: "new", phone: "1-555-5555" }],
+      });
+      loan.save().then((loan, err) => {
+        const pairId = loan.borrowers[0].pairId.toString();
         chai
           .request(app)
-          .delete("/loan/" + "100" + "/borrower")
+          .delete("/loan/" + loan.loanId + "/borrower/" + "invalidId")
           .end((err, res) => {
-            res.should.have.status(404);
+            res.should.have.status(500);
             done();
           });
       });
+    });
   });

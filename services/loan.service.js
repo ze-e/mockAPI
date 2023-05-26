@@ -1,7 +1,7 @@
 const Loan = require("../models/Loan.model");
 
 // GET all loan objects
-async function getAllLoans() {
+exports.getAllLoans = async () => {
   try {
     const loans = await Loan.find();
     return loans;
@@ -11,7 +11,7 @@ async function getAllLoans() {
 }
 
 // GET one loan object by loanId
-async function getLoanById(loanId) {
+exports.getLoanById = async (loanId) => {
   try {
     const loan = await Loan.findOne({loanId: loanId});
     return loan;
@@ -21,7 +21,7 @@ async function getLoanById(loanId) {
 }
 
 // POST method to add a new loan object with an array of borrowers
-async function createLoan(loanData) {
+exports.createLoan = async (loanData) => {
   try {
     const loan = await Loan.create(loanData);
     return loan;
@@ -31,7 +31,7 @@ async function createLoan(loanData) {
 }
 
 // PATCH method to update borrower information by loanId and pairId
-async function updateBorrower(loanId, pairId, borrowerData) {
+exports.updateBorrower = async (loanId, pairId, borrowerData) => {
   try {
     const loan = await Loan.findOne({ loanId: loanId });
     if (!loan) {
@@ -55,7 +55,7 @@ async function updateBorrower(loanId, pairId, borrowerData) {
 }
 
 // PATCH or DELETE method to delete a borrower by loanId and pairId
-async function deleteBorrower(loanId, pairId) {
+exports.deleteBorrower = async (loanId, pairId) => {
   try {
     const loan = await Loan.findOne({ loanId: loanId });
     if (!loan.borrowers) {
@@ -74,19 +74,10 @@ async function deleteBorrower(loanId, pairId) {
 }
 
 // DELETE method to delete a loan object by loanId
-async function deleteLoan(loanId) {
+exports.deleteLoan  = async (loanId) =>{
   try {
     await Loan.findOneAndDelete({ loanId: loanId });
   } catch (error) {
     throw new Error(`Error while deleting loan`);
   }
 }
-
-module.exports = {
-  getAllLoans,
-  getLoanById,
-  createLoan,
-  updateBorrower,
-  deleteBorrower,
-  deleteLoan,
-};

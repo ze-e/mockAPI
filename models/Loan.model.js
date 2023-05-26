@@ -29,7 +29,7 @@ const loanSchema = new Schema({
         type: String,
       },
     },
-  ],
+  ]
 });
 
 module.exports = mongoose.model("Loan", loanSchema);

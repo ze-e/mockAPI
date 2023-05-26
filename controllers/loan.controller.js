@@ -42,10 +42,7 @@ exports.updateBorrower = async (req, res) => {
 
 exports.deleteBorrower = async (req, res) => {
   try {
-    await loanService.deleteBorrower(
-      req.params.id,
-      req.body.pairId,
-    );
+    await loanService.deleteBorrower(req.params.id, req.params.pairId);
     res.status(200).json({ message: "borrower deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
